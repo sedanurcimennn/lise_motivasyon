@@ -1,0 +1,894 @@
+---
+// Advent Calendar Data - 30 günlük motivasyon ve sınav hazırlık takvimi
+const calendarDays = [
+  {
+    day: 1,
+    title: "Hedef Belirleme",
+    content: "Bugün kendine bir hedef koy! Hangi üniversitede hangi bölümü okumak istiyorsun? Hedeflerini yazılı hale getir ve her gün görebileceğin bir yere as. Net hedefler, başarıya giden yolda ilk adımdır! 🎯"
+  },
+  {
+    day: 2,
+    title: "Zaman Yönetimi",
+    content: "Etkili çalışma için zaman yönetimi şart! Pomodoro tekniğini dene: 25 dakika odaklan, 5 dakika mola. Günlük çalışma planı yap ve sosyal medya kullanımını sınırla. Zamanını verimli kullan, geleceğini şekillendir! ⏰"
+  },
+  {
+    day: 3,
+    title: "Bilgisayar Mühendisliği Nedir?",
+    content: "Bilgisayar Mühendisliği, yazılım ve donanım sistemlerini tasarlayan, geliştiren ve yöneten bir mühendislik dalıdır. Programlama, algoritma, veri yapıları, yapay zeka, siber güvenlik gibi alanlarda çalışabilirsin. İlgi alanını keşfet! 💻"
+  },
+  {
+    day: 4,
+    title: "TYT Stratejisi",
+    content: "TYT'de tüm derslerden soru çıkıyor. Türkçe ve Matematik temelini güçlendir. Her gün en az 20 soru çöz. Deneme sınavlarına düzenli katıl. Hatalarını analiz et ve tekrar etme. Sabırlı ve istikrarlı ol! 📚"
+  },
+  {
+    day: 5,
+    title: "AYT Matematik",
+    content: "AYT Matematik için konuları adım adım öğren. Her konuyu anlamadan geçme. Formülleri ezberlemek yerine mantığını kavra. Bol soru çöz, farklı kaynaklardan pratik yap. Matematik korkulacak değil, sevilecek bir ders! 🔢"
+  },
+  {
+    day: 6,
+    title: "AYT Fizik",
+    content: "Fizik için önce temel kavramları anla. Formülleri ezberleme, mantığını öğren. Günlük hayattan örneklerle bağlantı kur. Deney ve gözlem yapmayı sev. Fizik, evreni anlamanın anahtarıdır! ⚡"
+  },
+  {
+    day: 7,
+    title: "Motivasyon: Başarı Hikayeleri",
+    content: "Her başarılı insan bir zamanlar başlangıçtaydı. Zorluklar seni güçlendirir, hatalar öğretir. Pes etme, devam et! Bugün zor gelse bile, yarın daha iyi olacak. Kendine inan, çalışmaya devam et! 💪"
+  },
+  {
+    day: 8,
+    title: "💝 Özel Motivasyon",
+    content: "Sen özelsin ve başarabilirsin! Her zorluk, seni hedefine bir adım daha yaklaştırır. Bugün zor olsa bile, yarın daha güçlü olacaksın. Pes etme, devam et! Senin hikayen henüz yazılıyor! ✨💎"
+  },
+  {
+    day: 9,
+    title: "Programlama Öğrenmeye Başla",
+    content: "Bilgisayar mühendisliği için programlama temel bir beceridir. Python ile başlamak harika bir seçim! Codecademy, freeCodeCamp gibi ücretsiz kaynaklardan öğren. Her gün 30 dakika kod yaz. Küçük projeler yap, hatalarından öğren! "
+  },
+  {
+    day: 10,
+    title: "Ders Çalışma Teknikleri",
+    content: "Aktif öğrenme tekniklerini kullan: Not al, özet çıkar, başkalarına anlat. Feynman tekniğini dene: Bir konuyu basitçe açıklayabiliyorsan öğrenmişsindir. Görsel hafıza teknikleri kullan, mind map oluştur! 🧠"
+  },
+  {
+    day: 11,
+    title: "Stres Yönetimi",
+    content: "Sınav stresi normaldir ama kontrol altında tutulmalıdır. Nefes egzersizleri yap, düzenli uyu, sağlıklı beslen. Spor yap, hobilerine zaman ayır. Stres yönetimi, başarının önemli bir parçasıdır! 🧘"
+  },
+  {
+    day: 12,
+    title: "Bilgisayar Mühendisliği Alanları",
+    content: "Bilgisayar mühendisliği geniş bir alan: Web geliştirme, mobil uygulama, yapay zeka, siber güvenlik, oyun geliştirme, veri bilimi... Hangi alan ilgini çekiyor? Araştır, küçük projeler yap, keşfet! 🚀"
+  },
+  {
+    day: 13,
+    title: "Deneme Sınavı Stratejisi",
+    content: "Deneme sınavlarını gerçek sınav gibi al. Süre tut, telefonu kapat, sessiz bir ortam oluştur. Sınav sonrası hatalarını analiz et: Hangi konularda eksiksin? Zaman yönetimini nasıl yapabilirsin? Her deneme bir öğrenme fırsatı! 📊"
+  },
+  {
+    day: 14,
+    title: "Teknoloji Trendlerini Takip Et",
+    content: "Bilgisayar mühendisliği sürekli gelişen bir alan. Yapay zeka, blockchain, cloud computing gibi trendleri takip et. Tech blog'ları oku, YouTube'da eğitim videoları izle. Güncel kalmak, kariyerinde avantaj sağlar! 📱"
+  },
+  {
+    day: 15,
+    title: "Yarı Yol Motivasyonu",
+    content: "Yarı yoldasın! Bugüne kadar gösterdiğin çaba harika. Biraz yorulmuş olabilirsin ama unutma: En zor anlar, en güçlü olduğun anlardır. Devam et, hedefin çok yakın! Sen başarabilirsin! 🌟"
+  },
+  {
+    day: 16,
+    title: "Problem Çözme Becerisi",
+    content: "Bilgisayar mühendisliği problem çözmekle ilgilidir. Matematik ve fizik sorularını çözerken problem çözme becerini geliştiriyorsun. Adım adım düşün, analiz et, çözüm üret. Bu beceri hem sınavda hem kariyerinde işine yarayacak! 🧩"
+  },
+  {
+    day: 17,
+    title: "Üniversite Araştırması",
+    content: "Hangi üniversitelerde bilgisayar mühendisliği var? Bölümlerin müfredatlarını incele, öğretim üyelerini araştır, mezunların kariyerlerini takip et. Üniversite seçimi, kariyer yolunun önemli bir parçasıdır! 🎓"
+  },
+  {
+    day: 18,
+    title: "Konsantrasyon Geliştirme",
+    content: "Dikkat dağınıklığı çalışmanın önündeki en büyük engel. Telefonu başka odaya koy, sosyal medyayı kapat. Çalışma ortamını düzenle, gürültüden uzaklaş. Meditasyon yap, mindfulness tekniklerini öğren. Odaklan, başar! 🎯"
+  },
+  {
+    day: 19,
+    title: "Kodlama Projeleri Yap",
+    content: "Küçük projeler yaparak öğren! Hesap makinesi, to-do list, basit oyun gibi projelerle başla. GitHub'da hesap aç, projelerini paylaş. Her proje, portföyüne eklenen bir değerdir. Pratik yapmak, öğrenmenin en iyi yoludur! 💻"
+  },
+  {
+    day: 20,
+    title: "Hata Yapmaktan Korkma",
+    content: "Hatalar öğrenmenin bir parçasıdır! Yanlış cevap verdiğinde üzülme, öğren. Her hata, bir sonraki doğru cevabın temelidir. Bilgisayar mühendisliğinde de hatalar olur, önemli olan onlardan öğrenmektir. Cesur ol! 💪"
+  },
+  {
+    day: 21,
+    title: "Networking ve Topluluk",
+    content: "Teknoloji topluluklarına katıl! Meetup'lara git, online topluluklarda aktif ol, mentor bul. Diğer öğrencilerle iletişim kur, projeler üzerinde birlikte çalış. Networking, kariyerinde çok önemlidir! 🤝"
+  },
+  {
+    day: 22,
+    title: "Sağlıklı Yaşam",
+    content: "Başarı için sağlık şart! Düzenli uyku (7-8 saat), sağlıklı beslenme, düzenli egzersiz. Beyin de bir kas gibidir, ona iyi bak. Sağlıklı beden, sağlıklı zihin demektir! 🏃‍♀️"
+  },
+  {
+    day: 23,
+    title: "Portfolyo Oluştur",
+    content: "GitHub profilini düzenle, projelerini paylaş. Basit bir web sitesi yap, kendini tanıt. Blog yaz, öğrendiklerini paylaş. Portfolyo, yeteneklerini göstermenin en iyi yoludur. Bugünden başla! 📝"
+  },
+  {
+    day: 24,
+    title: "Sınav Günü Hazırlığı",
+    content: "Sınavdan bir gün önce: Sakin ol, hafif bir tekrar yap, erken uyu. Sınav günü: Kahvaltı yap, zamanında git, sakin kal. Her soruyu oku, zamanını iyi yönet. Sen hazırsın, başarabilirsin! 📋"
+  },
+  {
+    day: 25,
+    title: "Kariyer Yolları",
+    content: "Bilgisayar mühendisliği mezunu olarak: Yazılım geliştirici, sistem analisti, veri bilimci, siber güvenlik uzmanı, yapay zeka mühendisi olabilirsin. Startup'larda, büyük şirketlerde, kendi işini kurabilirsin. Seçenekler sınırsız! 🌈"
+  },
+  {
+    day: 26,
+    title: "Sürekli Öğrenme",
+    content: "Teknoloji sürekli değişiyor, sen de sürekli öğrenmelisin! Online kurslar al (Coursera, edX, Udemy), kitap oku, projeler yap. Öğrenmeyi bir yaşam tarzı haline getir. Her gün yeni bir şey öğren! 📚"
+  },
+  {
+    day: 27,
+    title: "Mentor Bul",
+    content: "Bir mentor bulmak, kariyer yolunda çok değerlidir. Üniversite öğrencileri, mezunlar, profesyonellerle iletişim kur. Sorular sor, tavsiye al, deneyimlerinden öğren. Mentorluk, hızlı öğrenmenin en iyi yoludur! 👥"
+  },
+  {
+    day: 28,
+    title: "Son Sprint",
+    content: "Son günlerdesin! Enerjini koru, son tekrarlarını yap. Eksik konuları tamamla ama yeni konu öğrenmeye çalışma. Deneme sınavları çöz, zaman yönetimini pekiştir. Son düzlükte, sabır ve istikrar önemli! 🏁"
+  },
+  {
+    day: 29,
+    title: "Kendine İnan",
+    content: "Bugüne kadar gösterdiğin çaba harika! Sen hazırsın, sen başarabilirsin. Kendine güven, pozitif düşün. Sınav sadece bir adım, senin hikayen çok daha büyük. İnan, çalış, başar! 💫"
+  },
+  {
+    day: 30,
+    title: "🎉 Başarı Yolunda",
+    content: "30 günü tamamladın! Bu süreçte öğrendiklerin, çalıştığın saatler, gösterdiğin azim seni buraya getirdi. Sınav bir sonuç değil, yeni bir başlangıç. Ne olursa olsun, sen değerlisin ve başarabilirsin. Gelecek senin! 🌟✨"
+  }
+];
+
+// Bugünün tarihini al ve hangi günlerin açık olacağını belirle
+const today = new Date();
+const currentDay = today.getDate();
+const currentMonth = today.getMonth();
+
+// Günlerin açılma kontrolü - tarih bazlı
+// Aralık ayı kontrolü (advent calendar genellikle Aralık'ta)
+// Konferans için tüm günleri tıklanabilir yapmak isterseniz, aşağıdaki satırı true yapın
+const allowAllDays = true; // true: tüm günler tıklanabilir, false: sadece bugüne kadar olan günler tıklanabilir
+const isDecember = currentMonth === 11; // JavaScript'te ay 0-11 arası
+
+// Her gün için tıklanabilir mi kontrolü (açılmış olması değil, tıklanabilir olması)
+function isDayUnlocked(day: number): boolean {
+  if (allowAllDays) return true; // Tüm günler tıklanabilir
+  if (!isDecember) return false;
+  return day <= currentDay;
+}
+---
+
+<html lang="tr">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/png" href="/mpal_logo.png" />
+		<link rel="apple-touch-icon" href="/mpal_logo.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content="Lise öğrencileri için 30 günlük motivasyon ve sınav hazırlık takvimi" />
+		<title>🎓 Lise Motivasyon Takvimi - 30 Günlük Sınav Hazırlık Rehberi</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			body {
+				font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+				background: linear-gradient(135deg, #122336 0%, #1a2f47 50%, #223b54 100%);
+				min-height: 100vh;
+				padding: 20px;
+				color: #333;
+				position: relative;
+				overflow-x: hidden;
+			}
+
+			body::before {
+				content: '';
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: 
+					radial-gradient(circle at 20% 50%, rgba(241, 185, 75, 0.1) 0%, transparent 50%),
+					radial-gradient(circle at 80% 80%, rgba(241, 185, 75, 0.1) 0%, transparent 50%);
+				pointer-events: none;
+				z-index: 0;
+			}
+
+			.container {
+				max-width: 1400px;
+				margin: 0 auto;
+				position: relative;
+				z-index: 1;
+			}
+
+			.header {
+				text-align: center;
+				color: white;
+				margin-bottom: 50px;
+				padding: 30px 20px;
+			}
+
+			.logo {
+				width: 140px;
+				height: 140px;
+				margin: 0 auto 25px;
+				background: linear-gradient(135deg, #f1b94b 0%, #f5c869 100%);
+				border-radius: 50%;
+				padding: 20px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				box-shadow: 0 15px 40px rgba(241, 185, 75, 0.4), 0 0 30px rgba(241, 185, 75, 0.2);
+				border: 4px solid rgba(255, 255, 255, 0.3);
+				transition: transform 0.3s ease;
+			}
+
+			.logo:hover {
+				transform: scale(1.05) rotate(5deg);
+			}
+
+			.logo img {
+				width: 100%;
+				height: 100%;
+				object-fit: contain;
+			}
+
+			.header h1 {
+				font-family: 'Poppins', sans-serif;
+				font-size: 3.5rem;
+				margin-bottom: 10px;
+				color: #ffffff;
+				font-weight: 800;
+				letter-spacing: -0.02em;
+				text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5), 0 0 30px rgba(241, 185, 75, 0.2);
+				position: relative;
+			}
+
+			.header .subtitle {
+				font-size: 1.1rem;
+				color: #f1b94b;
+				font-weight: 600;
+				letter-spacing: 0.05em;
+				margin-bottom: 15px;
+				text-transform: uppercase;
+				text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+			}
+
+			.header p {
+				font-size: 1.25rem;
+				opacity: 0.95;
+				color: #e3f2fd;
+				font-weight: 400;
+				letter-spacing: 0.01em;
+			}
+
+			.calendar-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+				gap: 18px;
+				margin-bottom: 50px;
+			}
+
+			.calendar-day {
+				aspect-ratio: 1;
+				background: rgba(255, 255, 255, 0.95);
+				border-radius: 16px;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				cursor: pointer;
+				transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+				box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+				position: relative;
+				overflow: hidden;
+				border: 3px solid transparent;
+			}
+
+			.calendar-day::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 215, 0, 0.05) 100%);
+				opacity: 0;
+				transition: opacity 0.3s ease;
+			}
+
+			.calendar-day:hover::before {
+				opacity: 1;
+			}
+
+			.calendar-day:hover {
+				transform: translateY(-8px) scale(1.05);
+				box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(241, 185, 75, 0.3);
+				border-color: #f1b94b;
+			}
+
+			.calendar-day.unlocked {
+				background: linear-gradient(135deg, #122336 0%, #1a2f47 100%);
+				color: #f1b94b;
+				border-color: #f1b94b;
+			}
+
+			.calendar-day.unlocked::before {
+				background: linear-gradient(135deg, rgba(241, 185, 75, 0.2) 0%, rgba(241, 185, 75, 0.1) 100%);
+			}
+
+			.calendar-day.locked {
+				background: rgba(255, 255, 255, 0.3);
+				color: rgba(255, 255, 255, 0.5);
+				cursor: not-allowed;
+				backdrop-filter: blur(10px);
+			}
+
+			.calendar-day.selected {
+				border: 4px solid #f1b94b;
+				box-shadow: 0 0 30px rgba(241, 185, 75, 0.6), 0 15px 35px rgba(0, 0, 0, 0.3);
+				transform: scale(1.08);
+			}
+
+			.day-number {
+				font-size: 2.2rem;
+				font-weight: 800;
+				margin-bottom: 8px;
+				position: relative;
+				z-index: 1;
+				text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+			}
+
+			.day-status {
+				font-size: 1.8rem;
+				position: relative;
+				z-index: 1;
+				font-weight: 700;
+			}
+
+			.calendar-day.unlocked .day-status {
+				color: #f1b94b;
+				text-shadow: 0 2px 8px rgba(241, 185, 75, 0.6);
+				font-size: 1.8rem;
+			}
+
+			/* Modal Styles */
+			.modal-overlay {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: rgba(18, 35, 54, 0.6);
+				backdrop-filter: blur(15px);
+				display: none;
+				align-items: center;
+				justify-content: center;
+				z-index: 1000;
+				opacity: 0;
+				transition: opacity 0.3s ease;
+			}
+
+			.modal-overlay.active {
+				display: flex;
+				opacity: 1;
+			}
+
+			.modal {
+				background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
+				border-radius: 24px;
+				padding: 0;
+				max-width: 700px;
+				width: 90%;
+				max-height: 85vh;
+				overflow-y: auto;
+				box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4), 0 0 40px rgba(241, 185, 75, 0.3);
+				position: relative;
+				border: 3px solid #f1b94b;
+				transform: scale(0.9);
+				transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+			}
+
+			.modal-overlay.active .modal {
+				transform: scale(1);
+			}
+
+			.modal-header {
+				background: linear-gradient(135deg, #122336 0%, #1a2f47 100%);
+				padding: 25px 30px;
+				border-radius: 20px 20px 0 0;
+				display: flex;
+				justify-content: space-between;
+				align-items: flex-start;
+				position: relative;
+			}
+
+			.modal-header::after {
+				content: '';
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				height: 4px;
+				background: linear-gradient(90deg, #f1b94b 0%, #f5c869 100%);
+			}
+
+			.day-badge {
+				background: linear-gradient(135deg, #f1b94b 0%, #f5c869 100%);
+				color: #122336;
+				padding: 10px 24px;
+				border-radius: 24px;
+				font-weight: 700;
+				font-size: 1rem;
+				box-shadow: 0 4px 12px rgba(241, 185, 75, 0.5);
+				font-family: 'Poppins', sans-serif;
+				letter-spacing: 0.02em;
+			}
+
+			.close-button {
+				background: rgba(255, 255, 255, 0.2);
+				border: 2px solid rgba(241, 185, 75, 0.5);
+				color: #f1b94b;
+				width: 40px;
+				height: 40px;
+				border-radius: 50%;
+				cursor: pointer;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 1.5rem;
+				font-weight: bold;
+				transition: all 0.3s ease;
+				backdrop-filter: blur(10px);
+			}
+
+			.close-button:hover {
+				background: rgba(241, 185, 75, 0.3);
+				border-color: #f1b94b;
+				transform: rotate(90deg) scale(1.1);
+			}
+
+			.modal-content {
+				padding: 40px;
+			}
+
+			.modal-title {
+				font-family: 'Poppins', sans-serif;
+				font-size: 2.2rem;
+				font-weight: 700;
+				color: #122336;
+				margin-bottom: 25px;
+				line-height: 1.3;
+				letter-spacing: -0.01em;
+			}
+
+			.modal-text {
+				font-size: 1.15rem;
+				line-height: 1.9;
+				color: #424242;
+				font-weight: 400;
+				letter-spacing: 0.01em;
+			}
+
+			/* Tablet */
+			@media (max-width: 1024px) {
+				.header h1 {
+					font-size: 2.8rem;
+				}
+			}
+
+			/* Mobil */
+			@media (max-width: 768px) {
+				body {
+					padding: 15px;
+				}
+
+				.header {
+					margin-bottom: 30px;
+					padding: 20px 15px;
+				}
+
+				.logo {
+					width: 110px;
+					height: 110px;
+					margin-bottom: 20px;
+					padding: 15px;
+				}
+
+				.header h1 {
+					font-size: 2rem;
+					margin-bottom: 8px;
+				}
+
+				.header .subtitle {
+					font-size: 0.85rem;
+					margin-bottom: 10px;
+				}
+
+				.header p {
+					font-size: 1rem;
+				}
+
+				.footer {
+					padding: 25px 15px;
+					margin-top: 40px;
+					font-size: 0.8rem;
+				}
+
+				.calendar-grid {
+					grid-template-columns: repeat(5, 1fr);
+					gap: 8px;
+					margin-bottom: 30px;
+					padding: 0 5px;
+					justify-items: center;
+				}
+
+				.calendar-day {
+					width: 100%;
+					max-width: 100%;
+				}
+
+				.calendar-day {
+					border-radius: 12px;
+					border-width: 2px;
+				}
+
+				.day-number {
+					font-size: 1.6rem;
+					margin-bottom: 5px;
+				}
+
+				.day-status {
+					font-size: 1.3rem;
+				}
+
+				.calendar-day.unlocked .day-status {
+					font-size: 1.5rem;
+				}
+
+				.modal {
+					width: 95%;
+					max-height: 90vh;
+					border-radius: 20px;
+					border-width: 2px;
+				}
+
+				.modal-header {
+					padding: 20px;
+					border-radius: 18px 18px 0 0;
+				}
+
+				.modal-content {
+					padding: 20px;
+				}
+
+				.modal-title {
+					font-size: 1.4rem;
+					margin-bottom: 20px;
+				}
+
+				.modal-text {
+					font-size: 0.95rem;
+					line-height: 1.7;
+				}
+
+				.day-badge {
+					padding: 8px 18px;
+					font-size: 0.9rem;
+				}
+
+				.close-button {
+					width: 35px;
+					height: 35px;
+					font-size: 1.3rem;
+				}
+			}
+
+			/* Küçük mobil */
+			@media (max-width: 480px) {
+				body {
+					padding: 10px;
+				}
+
+				.header {
+					padding: 15px 10px;
+					margin-bottom: 25px;
+				}
+
+				.header h1 {
+					font-size: 1.6rem;
+					margin-bottom: 6px;
+				}
+
+				.header .subtitle {
+					font-size: 0.7rem;
+					margin-bottom: 8px;
+				}
+
+				.header p {
+					font-size: 0.85rem;
+				}
+
+				.logo {
+					width: 85px;
+					height: 85px;
+					padding: 10px;
+					margin-bottom: 15px;
+				}
+
+				.calendar-grid {
+					grid-template-columns: repeat(5, 1fr);
+					gap: 6px;
+					padding: 0;
+					margin-bottom: 25px;
+				}
+
+				.calendar-day {
+					width: 100%;
+					max-width: 100%;
+					min-height: 0;
+				}
+
+				.day-number {
+					font-size: 1.3rem;
+					margin-bottom: 3px;
+				}
+
+				.day-status {
+					font-size: 1rem;
+				}
+
+				.calendar-day.unlocked .day-status {
+					font-size: 1.2rem;
+				}
+
+				.modal {
+					width: 98%;
+					border-radius: 16px;
+				}
+
+				.modal-header {
+					padding: 15px;
+				}
+
+				.modal-content {
+					padding: 15px;
+				}
+
+				.modal-title {
+					font-size: 1.2rem;
+					margin-bottom: 15px;
+				}
+
+				.modal-text {
+					font-size: 0.9rem;
+				}
+			}
+
+			/* Scrollbar Styling */
+			.modal::-webkit-scrollbar {
+				width: 10px;
+			}
+
+			.modal::-webkit-scrollbar-track {
+				background: #f1f1f1;
+				border-radius: 10px;
+			}
+
+			.modal::-webkit-scrollbar-thumb {
+				background: linear-gradient(135deg, #122336 0%, #1a2f47 100%);
+				border-radius: 10px;
+			}
+
+			.modal::-webkit-scrollbar-thumb:hover {
+				background: linear-gradient(135deg, #1a2f47 0%, #223b54 100%);
+			}
+
+			/* Footer Styles */
+			.footer {
+				text-align: center;
+				padding: 40px 20px;
+				margin-top: 60px;
+				color: rgba(255, 255, 255, 0.8);
+				font-size: 0.95rem;
+				position: relative;
+				z-index: 1;
+			}
+
+			.footer a {
+				color: #f1b94b;
+				text-decoration: none;
+				font-weight: 600;
+				transition: all 0.3s ease;
+				text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+			}
+
+			.footer a:hover {
+				color: #f5c869;
+				text-shadow: 0 0 10px rgba(241, 185, 75, 0.5);
+				text-decoration: underline;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="header">
+				<div class="logo">
+					<img src="/mpal_logo.png" alt="Okul Logosu" />
+				</div>
+				<div class="subtitle">Kariyer Günlerine Özel</div>
+				<h1>🎓 30 Günlük Motivasyon Takvimi</h1>
+				<p>Üniversite Sınavına Hazırlık ve Kariyer Yolculuğun</p>
+			</div>
+
+			<div class="calendar-grid">
+				{calendarDays.map((day) => {
+					const unlocked = isDayUnlocked(day.day);
+					return (
+						<div
+							class={`calendar-day ${unlocked ? 'unlocked' : 'locked'}`}
+							data-day={day.day}
+							data-unlocked={unlocked}
+							data-opened="false"
+						>
+							<div class="day-number">{day.day}</div>
+							<div class="day-status"></div>
+						</div>
+					);
+				})}
+			</div>
+
+			<!-- Footer -->
+			<footer class="footer">
+				Created by <a href="https://sedanurcimen.com.tr/tr/" target="_blank" rel="noopener noreferrer">Seda Nur Çimen</a>
+			</footer>
+		</div>
+
+		<!-- Modal -->
+		<div class="modal-overlay" id="modal-overlay">
+			<div class="modal">
+				<div class="modal-header">
+					<div class="day-badge" id="day-badge">Gün 1</div>
+					<button class="close-button" id="close-button">×</button>
+				</div>
+				<div class="modal-content">
+					<h2 class="modal-title" id="modal-title"></h2>
+					<p class="modal-text" id="modal-text"></p>
+				</div>
+			</div>
+		</div>
+
+		<script define:vars={{ calendarDays }}>
+			const calendarDaysData = calendarDays;
+			const modalOverlay = document.getElementById('modal-overlay');
+			const modalTitle = document.getElementById('modal-title');
+			const modalText = document.getElementById('modal-text');
+			const dayBadge = document.getElementById('day-badge');
+			const closeButton = document.getElementById('close-button');
+
+			// LocalStorage'dan açılan günleri al
+			function getOpenedDays() {
+				const opened = localStorage.getItem('openedDays');
+				return opened ? JSON.parse(opened) : [];
+			}
+
+			// LocalStorage'a açılan günü kaydet
+			function markDayAsOpened(dayNumber) {
+				const opened = getOpenedDays();
+				if (!opened.includes(dayNumber)) {
+					opened.push(dayNumber);
+					localStorage.setItem('openedDays', JSON.stringify(opened));
+					updateDayStatus(dayNumber, true);
+				}
+			}
+
+			// Gün durumunu güncelle (tik/boş)
+			function updateDayStatus(dayNumber, isOpened) {
+				const dayEl = document.querySelector(`[data-day="${dayNumber}"]`);
+				if (dayEl) {
+					const statusEl = dayEl.querySelector('.day-status');
+					if (statusEl) {
+						if (isOpened) {
+							statusEl.textContent = '✓';
+							dayEl.setAttribute('data-opened', 'true');
+							// Açılan günlerin stilini güncelle
+							if (dayEl.classList.contains('unlocked')) {
+								dayEl.classList.remove('locked');
+								dayEl.classList.add('unlocked');
+							}
+						} else {
+							statusEl.textContent = '';
+							dayEl.setAttribute('data-opened', 'false');
+						}
+					}
+				}
+			}
+
+			// Sayfa yüklendiğinde açılan günleri göster
+			function initializeOpenedDays() {
+				const opened = getOpenedDays();
+				opened.forEach(dayNumber => {
+					updateDayStatus(dayNumber, true);
+				});
+			}
+
+			function openModal(day) {
+				dayBadge.textContent = `Gün ${day.day}`;
+				modalTitle.textContent = day.title;
+				modalText.textContent = day.content;
+				modalOverlay.classList.add('active');
+				document.body.style.overflow = 'hidden';
+				
+				// Günü açılmış olarak işaretle
+				markDayAsOpened(day.day);
+			}
+
+			function closeModal() {
+				modalOverlay.classList.remove('active');
+				document.body.style.overflow = '';
+			}
+
+			closeButton.addEventListener('click', closeModal);
+			modalOverlay.addEventListener('click', (e) => {
+				if (e.target === modalOverlay) {
+					closeModal();
+				}
+			});
+
+			// ESC tuşu ile kapat
+			document.addEventListener('keydown', (e) => {
+				if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+					closeModal();
+				}
+			});
+
+			// Calendar day'lere click event listener ekle
+			document.addEventListener('DOMContentLoaded', () => {
+				// Açılan günleri yükle (localStorage'dan)
+				initializeOpenedDays();
+
+				document.querySelectorAll('.calendar-day').forEach(dayEl => {
+					dayEl.addEventListener('click', () => {
+						const dayNumber = parseInt(dayEl.getAttribute('data-day'));
+						const isUnlocked = dayEl.getAttribute('data-unlocked') === 'true';
+						
+						if (isUnlocked) {
+							const dayData = calendarDaysData.find(d => d.day === dayNumber);
+							if (dayData) {
+								// Seçili günü vurgula
+								document.querySelectorAll('.calendar-day').forEach(el => {
+									el.classList.remove('selected');
+								});
+								dayEl.classList.add('selected');
+								
+								// Modal'ı aç ve günü açılmış olarak işaretle
+								openModal(dayData);
+							}
+						}
+					});
+				});
+			});
+		</script>
+	</body>
+</html>
